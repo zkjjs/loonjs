@@ -1,0 +1,11 @@
+#!name = WeTalk 签到
+#!desc = WeTalk 自动化签到 + 视频奖励（Loon 版）
+#!author = TG@ZenMoFiShi
+#!homepage = https://github.com/zkjjs/loonjs
+
+[Script]
+http-request ^https:\/\/api\.wetalkapp\.com\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/WeTalk/WeTalk.js, tag=WeTalk抓取账号, enable=true
+cron "20 8,20 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/WeTalk/WeTalk.js, timeout=300, tag=WeTalk签到, enable=true
+
+[MITM]
+hostname = api.wetalkapp.com
