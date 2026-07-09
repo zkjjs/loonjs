@@ -4,8 +4,8 @@
 #!homepage = https://github.com/ZenmoFeiShi/Qx
 
 [Script]
-http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/你的用户名/你的仓库/main/PingMe.js, requires-body=false, timeout=10, tag=PingMe抓包
-cron "30 8,20 * * *" script-path=https://raw.githubusercontent.com/你的用户名/你的仓库/main/PingMe.js, timeout=30, tag=PingMe签到
+http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, requires-body=false, timeout=10, tag=PingMe抓包
+cron "30 8,20 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, timeout=30, tag=PingMe签到
 
 [MITM]
 hostname = api.pingmeapp.net
