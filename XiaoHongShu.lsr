@@ -11,6 +11,7 @@ DOMAIN-KEYWORD,xiaohongshu
 # 小红书公司及关联服务域名
 DOMAIN-SUFFIX,xingin.com
 DOMAIN-KEYWORD,xingin
+DOMAIN-SUFFIX,xhs.cn
 #
 # 图片 / 视频 / 头像 / 静态资源 CDN
 DOMAIN-SUFFIX,xhscdn.com
@@ -23,6 +24,15 @@ DOMAIN-SUFFIX,xhslink.com
 # 风控 / 登录验证 / 设备安全相关
 DOMAIN-SUFFIX,fengkongcloud.com
 #
+# 日志实测：小红书运行期间出现的 SDK / P2P / 网络探测域名
+# 2026-08-08 Loon 日志中这两个域名均命中 GEOIP,cn,DIRECT；
+# 其中 xinqiucc.com 响应包含 X-Xy-Cip，可暴露直连出口 IP。
+DOMAIN-SUFFIX,xinqiucc.com
+DOMAIN-SUFFIX,tianwenca.com
+#
 # 国际版 / RedNote
 DOMAIN-SUFFIX,rednote.com
 DOMAIN-KEYWORD,rednote
+#
+# Tencent HTTPDNS：日志中 com.xingin.discover 请求过 119.29.29.90:80，
+# 但该 IP 为共享服务，默认不做 IP-CIDR 强制分流，避免影响其他 App。
