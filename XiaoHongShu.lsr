@@ -3,15 +3,25 @@
 # UPDATED: 2026-08-08
 # FORMAT: Loon Rule Set
 #
-# 主站与 API
+# 主站 / API / Web / 账号 / 评论 / 发布
 DOMAIN-SUFFIX,xiaohongshu.com
 #
-# 图片 / 视频 / 静态资源 CDN
+# 小红书公司及关联服务域名
+DOMAIN-SUFFIX,xingin.com
+#
+# 图片 / 视频 / 头像 / 静态资源 CDN
 DOMAIN-SUFFIX,xhscdn.com
 DOMAIN-SUFFIX,xhscdn.net
 #
-# 小红书分享短链
+# 分享短链
 DOMAIN-SUFFIX,xhslink.com
 #
-# 国际版 RedNote
+# 风控 / 登录验证 / 设备安全相关
+DOMAIN-SUFFIX,fengkongcloud.com
+#
+# 国际版 / RedNote
 DOMAIN-SUFFIX,rednote.com
+#
+# 兜底匹配：防止新增以小红书品牌命名的域名漏网
+DOMAIN-KEYWORD,xiaohongshu
+DOMAIN-KEYWORD,xhscdn
