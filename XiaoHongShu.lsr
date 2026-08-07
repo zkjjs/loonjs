@@ -1,0 +1,17 @@
+# NAME: XiaoHongShu
+# DESC: 小红书 / RED / RedNote 分流规则（Loon Remote Rule）
+# UPDATED: 2026-08-08
+# FORMAT: Loon Rule Set
+#
+# 主站与 API
+DOMAIN-SUFFIX,xiaohongshu.com
+#
+# 图片 / 视频 / 静态资源 CDN
+DOMAIN-SUFFIX,xhscdn.com
+DOMAIN-SUFFIX,xhscdn.net
+#
+# 小红书分享短链
+DOMAIN-SUFFIX,xhslink.com
+#
+# 国际版 RedNote
+DOMAIN-SUFFIX,rednote.com
