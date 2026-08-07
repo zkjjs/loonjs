@@ -2,16 +2,20 @@
 # DESC: 小红书 / RED / RedNote 分流规则（Loon Remote Rule）
 # UPDATED: 2026-08-08
 # FORMAT: Loon Rule Set
+# NOTE: iOS 端以域名规则为主；PROCESS-NAME 在 iPhone 上不能作为可靠兜底。
 #
 # 主站 / API / Web / 账号 / 评论 / 发布
 DOMAIN-SUFFIX,xiaohongshu.com
+DOMAIN-KEYWORD,xiaohongshu
 #
 # 小红书公司及关联服务域名
 DOMAIN-SUFFIX,xingin.com
+DOMAIN-KEYWORD,xingin
 #
 # 图片 / 视频 / 头像 / 静态资源 CDN
 DOMAIN-SUFFIX,xhscdn.com
 DOMAIN-SUFFIX,xhscdn.net
+DOMAIN-KEYWORD,xhscdn
 #
 # 分享短链
 DOMAIN-SUFFIX,xhslink.com
@@ -21,7 +25,4 @@ DOMAIN-SUFFIX,fengkongcloud.com
 #
 # 国际版 / RedNote
 DOMAIN-SUFFIX,rednote.com
-#
-# 兜底匹配：防止新增以小红书品牌命名的域名漏网
-DOMAIN-KEYWORD,xiaohongshu
-DOMAIN-KEYWORD,xhscdn
+DOMAIN-KEYWORD,rednote
