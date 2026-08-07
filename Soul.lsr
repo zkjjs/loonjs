@@ -1,0 +1,11 @@
+#!name=Soul
+#!desc=Soul App 分流规则
+#!author=zkjjs
+#!homepage=https://www.soulapp.cn
+
+[Rule]
+# Soul 官方主域及所有子域
+DOMAIN-SUFFIX,soulapp.cn,Soul
+
+# 如后续抓包发现独立域名，可继续添加
+# DOMAIN-SUFFIX,example.com,Soul
