@@ -1,0 +1,13 @@
+#!name=今日水印相机去开屏广告
+#!desc=根据启动日志拦截今日水印相机开屏广告相关域名；不修改会员/VIP，不处理正常业务接口。
+#!author=zkjjs
+#!tag=去广告,今日水印相机
+#!system=iOS
+
+[Rule]
+DOMAIN,ad.xhey.top,REJECT
+DOMAIN,api-access.pangolin-sdk-toutiao.com,REJECT
+DOMAIN,api-access.pangolin-sdk-toutiao1.com,REJECT
+DOMAIN,sf3-fe-tos.pglstatp-toutiao.com,REJECT
+DOMAIN,sdk.1rtb.net,REJECT
+DOMAIN,s.tuia.cn,REJECT
