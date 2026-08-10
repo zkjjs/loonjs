@@ -1,0 +1,15 @@
+# 今日水印相机 - 去开屏广告
+# Loon Rule Set (.lsr)
+# 根据 2026-08-10 启动日志制作
+#
+# 核心：阻断今日相机启动阶段访问的广告域名 ad.xhey.top
+# 附带阻断启动阶段观测到的广告 SDK 域名
+#
+# 不修改会员/VIP，不修改 xhey.top 其他正常业务域名。
+
+DOMAIN,ad.xhey.top,REJECT
+DOMAIN,api-access.pangolin-sdk-toutiao.com,REJECT
+DOMAIN,api-access.pangolin-sdk-toutiao1.com,REJECT
+DOMAIN,sf3-fe-tos.pglstatp-toutiao.com,REJECT
+DOMAIN,sdk.1rtb.net,REJECT
+DOMAIN,s.tuia.cn,REJECT
