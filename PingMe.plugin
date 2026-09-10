@@ -1,11 +1,11 @@
-#!name = PingMe 自动化签到+视频奖励
-#!desc = 抓取 PingMe App 请求参数，定时自动签到+领取视频奖励（Loon 版，改自 QuantumultX 脚本）
+#!name = PingMe 自动签到 + 视频奖励
+#!desc = 抓取 PingMe 账号参数，每天 08:30、20:30 自动签到并领取视频奖励（Loon 多账号版）
 #!author = 怎么肥事（原作者）/ Loon 适配
-#!homepage = https://github.com/ZenmoFeiShi/Qx
+#!homepage = https://github.com/zkjjs/loonjs
 
 [Script]
-http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, requires-body=false, timeout=10, tag=PingMe抓包
-cron "0 */3 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, timeout=30, tag=PingMe签到
+http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, requires-body=false, timeout=30, tag=PingMe抓包
+cron "30 8,20 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, timeout=300, tag=PingMe签到
 
 [MITM]
 hostname = api.pingmeapp.net
