@@ -1,11 +1,11 @@
 #!name = PingMe 自动签到 + 视频奖励
-#!desc = 抓取 PingMe 账号参数，每天 08:30、20:30 自动签到并领取视频奖励（Loon 多账号版）
+#!desc = 抓取 PingMe 账号参数，每 4 小时自动签到并领取视频奖励（Loon 多账号版）
 #!author = 怎么肥事（原作者）/ Loon 适配
 #!homepage = https://github.com/zkjjs/loonjs
 
 [Script]
 http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, requires-body=false, timeout=30, tag=PingMe抓包
-cron "30 8,20 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, timeout=300, tag=PingMe签到
+cron "0 */4 * * *" script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/PingMe.js, timeout=300, tag=PingMe签到
 
 [MITM]
 hostname = api.pingmeapp.net
