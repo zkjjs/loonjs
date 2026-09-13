@@ -1,0 +1,11 @@
+dns:
+  enhanced-mode: fake-ip
+  fake-ip-range: 10.6.0.1/15
+
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  auto-detect-interface: true
+  loopback-address:
+    - 10.7.0.1
