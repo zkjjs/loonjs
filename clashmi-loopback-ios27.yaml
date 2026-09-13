@@ -1,9 +1,3 @@
 tun:
-  enable: true
-  stack: gvisor
-  auto-route: true
-  auto-detect-interface: true
-  inet4-address:
-    - 10.7.0.2/30
   loopback-address:
     - 10.7.0.1
