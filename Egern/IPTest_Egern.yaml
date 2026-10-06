@@ -1,0 +1,15 @@
+name: 节点质量查询（Egern）
+description: 多源 IP 风险查询，需将脚本环境变量 POLICY 设置为 Egern 内节点或策略组的完整名称。
+author: Roddy-D（原脚本）；Egern 原生适配
+scriptings:
+  - generic:
+      name: 节点质量查询
+      script_url: https://raw.githubusercontent.com/zkjjs/loonjs/main/Egern/iptest-egern.js
+      update_interval: 86400
+      timeout: 35
+      env:
+        POLICY: ""
+        MaskIP: "false"
+widgets:
+  - name: 节点质量查询
+    script_name: 节点质量查询
