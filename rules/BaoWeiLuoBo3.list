@@ -1,0 +1,14 @@
+# 保卫萝卜3 / Loon 基础域名规则
+# 更新：2026-10-13
+# 导入 Loon 远程规则时选择 DIRECT；也可自行指定其他策略。
+# 仅基于官方页面核实的官网、下载入口和网页资源域名。
+# 未经游戏实机连接日志验证，不代表完整的登录、对战或更新服务器列表。
+# luobo.cn 为萝卜系列共享域名；assets.737.com 为发行平台共享网页资源域名。
+# 第三方登录、支付、广告、共享云服务以及直接 IP 连接按现有规则处理。
+# 来源：https://apps.apple.com/cn/app/id1460233109
+# 来源：https://www.luobo.cn/
+# 来源：https://luobo3.737.com/home/
+
+DOMAIN-SUFFIX,luobo.cn
+DOMAIN-SUFFIX,luobo3.737.com
+DOMAIN,assets.737.com
