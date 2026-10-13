@@ -1,14 +1,69 @@
-# 保卫萝卜3 / Loon 基础域名规则
+# 保卫萝卜3 / Loon 实机 HAR 分流规则
 # 更新：2026-10-13
-# 导入 Loon 远程规则时选择 DIRECT；也可自行指定其他策略。
-# 仅基于官方页面核实的官网、下载入口和网页资源域名。
-# 未经游戏实机连接日志验证，不代表完整的登录、对战或更新服务器列表。
-# luobo.cn 为萝卜系列共享域名；assets.737.com 为发行平台共享网页资源域名。
-# 第三方登录、支付、广告、共享云服务以及直接 IP 连接按现有规则处理。
-# 来源：https://apps.apple.com/cn/app/id1460233109
-# 来源：https://www.luobo.cn/
-# 来源：https://luobo3.737.com/home/
+# 来源：用户提供的游戏抓包，164 条请求、50 个唯一主机。
+# 46 个抓包主机 + 3 条已核实的官网规则，共 49 条。
+# 导入 Loon 远程规则时指定 DIRECT，放在会匹配这些域名的通用规则之前。
+# 规则本身不包含策略名称，无需改游戏请求或启用 MITM。
+# 不含 HAR 的 URL 参数、请求体、响应体、令牌、用户信息或设备标识。
+# DOMAIN 精确匹配抓包主机，避免将整个 qq.com/baidu.com/aliyuncs.com 直连。
+# SDK/登录域名为共享服务，其他应用访问相同主机时也会命中。
+# 广告 SDK 放行不等于屏蔽广告；若仍被其他优先级更高的插件拦截，需检查请求日志。
+# 抓包未包含的域名、轮换 CDN 主机、UDP 或直接 IP 连接不保证覆盖。
+# 排除仅 QQ User-Agent 请求的四个主机：iosqqdata.ab.qq.com、open.gtimg.cn、rmonitor.qq.com、vv.video.qq.com。
 
+# 游戏启动配置接口（抓包明确为 Carrot3 请求）
+DOMAIN,gate-nebula.737.com
+
+# QQ 登录与相关连接 SDK
+DOMAIN,cgi.connect.qq.com
+DOMAIN,openmobile.qq.com
+DOMAIN,appsupport.qq.com
+DOMAIN,huatuocode.huatuo.qq.com
+
+# 本次会话的资源、广告、统计及辅助 SDK 主机
+DOMAIN,adservice.sigmob.cn
+DOMAIN,als.baidu.com
+DOMAIN,api-access.pangolin-sdk-toutiao.com
+DOMAIN,api-access.pangolin-sdk-toutiao1.com
+DOMAIN,apmplus.volces.com
+DOMAIN,appcfg.v.qq.com
+DOMAIN,bgg.baidu.com
+DOMAIN,dc.sigmob.cn
+DOMAIN,er.ns.aliyuncs.com
+DOMAIN,feishu-develop-tracker.cn-shanghai.log.aliyuncs.com
+DOMAIN,feishu.cn-shanghai.log.aliyuncs.com
+DOMAIN,gdfp.gifshow.com
+DOMAIN,ios.bugly.qq.com
+DOMAIN,ioskuka.com
+DOMAIN,lf-cdn-tos.bytescm.com
+DOMAIN,log-api.pangolin-sdk-toutiao-b.com
+DOMAIN,log-api.pangolin-sdk-toutiao.com
+DOMAIN,mi.gdt.qq.com
+DOMAIN,mobads-logs.baidu.com
+DOMAIN,mobads.baidu.com
+DOMAIN,nadvideo2.baidu.com
+DOMAIN,nebula-ux.cn-shanghai.log.aliyuncs.com
+DOMAIN,open.e.kuaishou.com
+DOMAIN,p26-be-pack-sign.pglstatp-toutiao.com
+DOMAIN,p3-be-pack-sign.pglstatp-toutiao.com
+DOMAIN,p3-sign.douyinpic.com
+DOMAIN,qzs.gdtimg.com
+DOMAIN,qzs.qq.com
+DOMAIN,rtbcallback.sigmob.cn
+DOMAIN,sdk.e.qq.com
+DOMAIN,sdkquic.e.qq.com
+DOMAIN,sf3-fe-tos.pglstatp-toutiao.com
+DOMAIN,sf6-fe-tos.pglstatp-toutiao.com
+DOMAIN,tm.sigmob.cn
+DOMAIN,tnc3-alisc1.zijieapi.com
+DOMAIN,toblog.ctobsnssdk.com
+DOMAIN,v26-be-pack.pglstatp-toutiao.com
+DOMAIN,v5-ex-be-pack.pglstatp-toutiao.com
+DOMAIN,win.gdt.qq.com
+DOMAIN,wn.pos.baidu.com
+DOMAIN,wup.imtt.qq.com
+
+# 官网及官方网页资源（保留原有三条）
 DOMAIN-SUFFIX,luobo.cn
 DOMAIN-SUFFIX,luobo3.737.com
 DOMAIN,assets.737.com
