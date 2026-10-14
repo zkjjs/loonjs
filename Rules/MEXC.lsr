@@ -1,0 +1,11 @@
+# MEXC Exchange - Loon Remote Rules
+# Select the desired policy in Loon when importing this remote rule.
+# Domains cover the main website and related API subdomains.
+DOMAIN-SUFFIX,mexc.com
+DOMAIN-SUFFIX,mexc.io
+DOMAIN-SUFFIX,mexc.co
+DOMAIN-SUFFIX,mexc.org
+DOMAIN-SUFFIX,mexc.kr
+DOMAIN-SUFFIX,mexc.fm
+DOMAIN-SUFFIX,mexcstatic.com
+DOMAIN-SUFFIX,mexcassets.com
