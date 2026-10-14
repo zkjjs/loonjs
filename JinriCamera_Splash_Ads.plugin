@@ -1,0 +1,25 @@
+#!name=今日水印相机开屏去广告
+#!desc=拦截已知广告下发接口。兼容旧版 Loon 复写语法，无远程脚本。需启用 MitM 并信任证书；共享广告接口可能同时影响其他 App 的广告。未在设备实测。
+#!author=Codex
+#!tag=去广告
+#!date=2026-10-14
+
+# 规则依据：
+# https://github.com/Thelongdarkorg/loon-plugins/blob/main/watermark_camera_splash_ad_block.plugin
+# 重写：移除对首个查询参数 ip 的依赖，限定接口路径边界。
+# 不匹配拍照、时间、定位、登录、团队上传等业务路径。
+# 无远程脚本依赖；此本地文件不会自动获取后续规则更新。
+
+[Rewrite]
+# 已知自建广告服务：兼容无查询参数、任意参数顺序和可选尾斜杠。
+# 该接口也可能承载横幅广告。
+^https?://api\.sogaha\.cn/ssp/ad/get/?(?:\?|$) reject-dict
+
+# 穿山甲 SDK 广告投放：仅拦广告路径，不封锁整个域名。
+^https?://api-access\.pangolin-sdk-toutiao\.com/api/ad/union/sdk(?:/|\?|$) reject-200
+
+# Pangle 已知广告路径；不匹配广告路径以外的内容。
+^https?://(?:[A-Za-z0-9-]+\.)+pangle\.cn/(?:api/ad|ad|splash|material)(?:/|\?|$) reject-200
+
+[MitM]
+hostname = api.sogaha.cn, api-access.pangolin-sdk-toutiao.com, *.pangle.cn
