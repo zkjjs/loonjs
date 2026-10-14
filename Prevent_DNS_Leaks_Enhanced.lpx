@@ -1,0 +1,354 @@
+#!name=DNS 防泄漏增强（保留 UDP）
+#!desc=配合阿里云默认 DNS 主配置：常用国外域名使用 Cloudflare DoH，拦截规则可见的 53/853 外发；不修改 STUN、IPv6 或 Tello 通话路由。添加时选择可用代理策略。需开启主配置 hijack-dns = *:53，关闭包含系统 DNS 与查询回落，DoH 模式选择 Rule。不能保证拦截绕过 TUN、自带 DoH 或节点端 DNS。
+#!author=zkjjs
+#!tag=DNS
+#!date=2026-10-14
+#!homepage=https://github.com/zkjjs/loonjs
+
+# Original rule-list reference: 非正常人类研究中心
+# https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx
+# Independently extended; not an official upstream version.
+# REQUIRED in main config: AliDNS DoH + hijack-dns = *:53.
+# REQUIRED in UI: system DNS OFF; query fallback OFF; DoH mode Rule.
+# Do NOT enable the original plugin alongside this replacement.
+# Select a working proxy policy when adding this plugin (PROXY below).
+# No global doh-server here: plugin DNS servers are appended, not replacements.
+# This plugin cannot enforce main-config switches or override higher-priority rules.
+# Blocking 853 intentionally disallows application DoT/DoQ; use DoH instead.
+# DNS handling is limited to traffic visible to Loon; no zero-leak guarantee.
+# Keep disable-stun = false in main config. No global UDP disable is used.
+# Tello real-ip and routing are preserved by leaving them to the main config.
+
+[Rule]
+# Best-effort fallback guards AFTER DNS hijacking; earlier/local rules may win.
+DEST-PORT,53,REJECT
+DEST-PORT,853,REJECT
+# Pin encrypted DNS transports without adding parallel default resolvers.
+IP-CIDR,223.5.5.5/32,DIRECT,no-resolve
+IP-CIDR,223.6.6.6/32,DIRECT,no-resolve
+IP-CIDR,1.1.1.1/32,PROXY,no-resolve
+IP-CIDR,1.0.0.1/32,PROXY,no-resolve
+DOMAIN,dns.alidns.com,DIRECT
+DOMAIN,cloudflare-dns.com,PROXY
+DOMAIN-SUFFIX,astrill.com,PROXY
+DOMAIN-SUFFIX,astrill.org,PROXY
+DOMAIN-SUFFIX,browserleaks.com,PROXY
+DOMAIN-SUFFIX,browserleaks.org,PROXY
+DOMAIN-SUFFIX,dnscheck.tools,PROXY
+DOMAIN-SUFFIX,dnsleak.asn247.net,PROXY
+DOMAIN-SUFFIX,dnsleak.com,PROXY
+DOMAIN-SUFFIX,dnsleaktest.com,PROXY
+DOMAIN-SUFFIX,expressvpn.com,PROXY
+DOMAIN-SUFFIX,ipapi.co,PROXY
+DOMAIN-SUFFIX,ipleak.net,PROXY
+DOMAIN-SUFFIX,nordvpn.com,PROXY
+DOMAIN-SUFFIX,perfect-privacy.com,PROXY
+DOMAIN-SUFFIX,pixelscan.net,PROXY
+DOMAIN-SUFFIX,surfshark.com,PROXY
+DOMAIN-SUFFIX,surfsharkdns.com,PROXY
+DOMAIN-SUFFIX,vpnunlimited.com,PROXY
+DOMAIN-SUFFIX,whoer.net,PROXY
+DOMAIN-SUFFIX,whrq.net,PROXY
+DOMAIN,ipv4.ping0.cc,PROXY
+DOMAIN,ipv6.ping0.cc,PROXY
+DOMAIN,ip-scan.adspower.net,PROXY
+
+[Host]
+# Explicit foreign-domain DNS policy, including both apex and subdomains.
+# Unlisted domains retain main-config default AliDNS. Test coverage is not global privacy.
+3gppnetwork.org = server:https://1.1.1.1/dns-query
+*.3gppnetwork.org = server:https://1.1.1.1/dns-query
+akamaized.net = server:https://1.1.1.1/dns-query
+*.akamaized.net = server:https://1.1.1.1/dns-query
+amazon.co.jp = server:https://1.1.1.1/dns-query
+*.amazon.co.jp = server:https://1.1.1.1/dns-query
+amazon.com = server:https://1.1.1.1/dns-query
+*.amazon.com = server:https://1.1.1.1/dns-query
+amazonaws.com = server:https://1.1.1.1/dns-query
+*.amazonaws.com = server:https://1.1.1.1/dns-query
+android.com = server:https://1.1.1.1/dns-query
+*.android.com = server:https://1.1.1.1/dns-query
+anthropic.com = server:https://1.1.1.1/dns-query
+*.anthropic.com = server:https://1.1.1.1/dns-query
+astrill.com = server:https://1.1.1.1/dns-query
+*.astrill.com = server:https://1.1.1.1/dns-query
+astrill.org = server:https://1.1.1.1/dns-query
+*.astrill.org = server:https://1.1.1.1/dns-query
+aws.amazon.com = server:https://1.1.1.1/dns-query
+*.aws.amazon.com = server:https://1.1.1.1/dns-query
+bing.com = server:https://1.1.1.1/dns-query
+*.bing.com = server:https://1.1.1.1/dns-query
+browserleaks.com = server:https://1.1.1.1/dns-query
+*.browserleaks.com = server:https://1.1.1.1/dns-query
+browserleaks.org = server:https://1.1.1.1/dns-query
+*.browserleaks.org = server:https://1.1.1.1/dns-query
+byteoversea.com = server:https://1.1.1.1/dns-query
+*.byteoversea.com = server:https://1.1.1.1/dns-query
+cdninstagram.com = server:https://1.1.1.1/dns-query
+*.cdninstagram.com = server:https://1.1.1.1/dns-query
+chatgpt.com = server:https://1.1.1.1/dns-query
+*.chatgpt.com = server:https://1.1.1.1/dns-query
+claude.ai = server:https://1.1.1.1/dns-query
+*.claude.ai = server:https://1.1.1.1/dns-query
+claude.com = server:https://1.1.1.1/dns-query
+*.claude.com = server:https://1.1.1.1/dns-query
+cloudflare-dns.com = server:https://1.1.1.1/dns-query
+*.cloudflare-dns.com = server:https://1.1.1.1/dns-query
+cloudflare.com = server:https://1.1.1.1/dns-query
+*.cloudflare.com = server:https://1.1.1.1/dns-query
+cloudfront.net = server:https://1.1.1.1/dns-query
+*.cloudfront.net = server:https://1.1.1.1/dns-query
+copilot.microsoft.com = server:https://1.1.1.1/dns-query
+*.copilot.microsoft.com = server:https://1.1.1.1/dns-query
+discord.com = server:https://1.1.1.1/dns-query
+*.discord.com = server:https://1.1.1.1/dns-query
+discord.gg = server:https://1.1.1.1/dns-query
+*.discord.gg = server:https://1.1.1.1/dns-query
+discordapp.com = server:https://1.1.1.1/dns-query
+*.discordapp.com = server:https://1.1.1.1/dns-query
+discordapp.net = server:https://1.1.1.1/dns-query
+*.discordapp.net = server:https://1.1.1.1/dns-query
+dnscheck.tools = server:https://1.1.1.1/dns-query
+*.dnscheck.tools = server:https://1.1.1.1/dns-query
+dnsleak.asn247.net = server:https://1.1.1.1/dns-query
+*.dnsleak.asn247.net = server:https://1.1.1.1/dns-query
+dnsleak.com = server:https://1.1.1.1/dns-query
+*.dnsleak.com = server:https://1.1.1.1/dns-query
+dnsleaktest.com = server:https://1.1.1.1/dns-query
+*.dnsleaktest.com = server:https://1.1.1.1/dns-query
+doubleclick.net = server:https://1.1.1.1/dns-query
+*.doubleclick.net = server:https://1.1.1.1/dns-query
+epdg.epc.mnc260.mcc310.pub.3gppnetwork.org = server:https://1.1.1.1/dns-query
+*.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org = server:https://1.1.1.1/dns-query
+expressvpn.com = server:https://1.1.1.1/dns-query
+*.expressvpn.com = server:https://1.1.1.1/dns-query
+facebook.com = server:https://1.1.1.1/dns-query
+*.facebook.com = server:https://1.1.1.1/dns-query
+facebook.net = server:https://1.1.1.1/dns-query
+*.facebook.net = server:https://1.1.1.1/dns-query
+fbcdn.net = server:https://1.1.1.1/dns-query
+*.fbcdn.net = server:https://1.1.1.1/dns-query
+fbsbx.com = server:https://1.1.1.1/dns-query
+*.fbsbx.com = server:https://1.1.1.1/dns-query
+ggpht.com = server:https://1.1.1.1/dns-query
+*.ggpht.com = server:https://1.1.1.1/dns-query
+github.com = server:https://1.1.1.1/dns-query
+*.github.com = server:https://1.1.1.1/dns-query
+github.io = server:https://1.1.1.1/dns-query
+*.github.io = server:https://1.1.1.1/dns-query
+githubassets.com = server:https://1.1.1.1/dns-query
+*.githubassets.com = server:https://1.1.1.1/dns-query
+githubusercontent.com = server:https://1.1.1.1/dns-query
+*.githubusercontent.com = server:https://1.1.1.1/dns-query
+gitlab.com = server:https://1.1.1.1/dns-query
+*.gitlab.com = server:https://1.1.1.1/dns-query
+gmail.com = server:https://1.1.1.1/dns-query
+*.gmail.com = server:https://1.1.1.1/dns-query
+google.co.jp = server:https://1.1.1.1/dns-query
+*.google.co.jp = server:https://1.1.1.1/dns-query
+google.com = server:https://1.1.1.1/dns-query
+*.google.com = server:https://1.1.1.1/dns-query
+google.com.hk = server:https://1.1.1.1/dns-query
+*.google.com.hk = server:https://1.1.1.1/dns-query
+google.com.tw = server:https://1.1.1.1/dns-query
+*.google.com.tw = server:https://1.1.1.1/dns-query
+googleadservices.com = server:https://1.1.1.1/dns-query
+*.googleadservices.com = server:https://1.1.1.1/dns-query
+googleapis.com = server:https://1.1.1.1/dns-query
+*.googleapis.com = server:https://1.1.1.1/dns-query
+googlesyndication.com = server:https://1.1.1.1/dns-query
+*.googlesyndication.com = server:https://1.1.1.1/dns-query
+googleusercontent.com = server:https://1.1.1.1/dns-query
+*.googleusercontent.com = server:https://1.1.1.1/dns-query
+googlevideo.com = server:https://1.1.1.1/dns-query
+*.googlevideo.com = server:https://1.1.1.1/dns-query
+grok.com = server:https://1.1.1.1/dns-query
+*.grok.com = server:https://1.1.1.1/dns-query
+gstatic.com = server:https://1.1.1.1/dns-query
+*.gstatic.com = server:https://1.1.1.1/dns-query
+ibytedtos.com = server:https://1.1.1.1/dns-query
+*.ibytedtos.com = server:https://1.1.1.1/dns-query
+icanhazip.com = server:https://1.1.1.1/dns-query
+*.icanhazip.com = server:https://1.1.1.1/dns-query
+instagram.com = server:https://1.1.1.1/dns-query
+*.instagram.com = server:https://1.1.1.1/dns-query
+ip.cx = server:https://1.1.1.1/dns-query
+*.ip.cx = server:https://1.1.1.1/dns-query
+ip.sb = server:https://1.1.1.1/dns-query
+*.ip.sb = server:https://1.1.1.1/dns-query
+ipapi.co = server:https://1.1.1.1/dns-query
+*.ipapi.co = server:https://1.1.1.1/dns-query
+ipapi.is = server:https://1.1.1.1/dns-query
+*.ipapi.is = server:https://1.1.1.1/dns-query
+ipify.org = server:https://1.1.1.1/dns-query
+*.ipify.org = server:https://1.1.1.1/dns-query
+ipinfo.io = server:https://1.1.1.1/dns-query
+*.ipinfo.io = server:https://1.1.1.1/dns-query
+ipjiance.net = server:https://1.1.1.1/dns-query
+*.ipjiance.net = server:https://1.1.1.1/dns-query
+ipleak.net = server:https://1.1.1.1/dns-query
+*.ipleak.net = server:https://1.1.1.1/dns-query
+ipsuper.com = server:https://1.1.1.1/dns-query
+*.ipsuper.com = server:https://1.1.1.1/dns-query
+jtvnw.net = server:https://1.1.1.1/dns-query
+*.jtvnw.net = server:https://1.1.1.1/dns-query
+live.com = server:https://1.1.1.1/dns-query
+*.live.com = server:https://1.1.1.1/dns-query
+meta.ai = server:https://1.1.1.1/dns-query
+*.meta.ai = server:https://1.1.1.1/dns-query
+meta.com = server:https://1.1.1.1/dns-query
+*.meta.com = server:https://1.1.1.1/dns-query
+mexc.co = server:https://1.1.1.1/dns-query
+*.mexc.co = server:https://1.1.1.1/dns-query
+mexc.com = server:https://1.1.1.1/dns-query
+*.mexc.com = server:https://1.1.1.1/dns-query
+mexc.in = server:https://1.1.1.1/dns-query
+*.mexc.in = server:https://1.1.1.1/dns-query
+mexc.link = server:https://1.1.1.1/dns-query
+*.mexc.link = server:https://1.1.1.1/dns-query
+microsoft.com = server:https://1.1.1.1/dns-query
+*.microsoft.com = server:https://1.1.1.1/dns-query
+microsoftonline.com = server:https://1.1.1.1/dns-query
+*.microsoftonline.com = server:https://1.1.1.1/dns-query
+muscdn.com = server:https://1.1.1.1/dns-query
+*.muscdn.com = server:https://1.1.1.1/dns-query
+musical.ly = server:https://1.1.1.1/dns-query
+*.musical.ly = server:https://1.1.1.1/dns-query
+mx-api.com = server:https://1.1.1.1/dns-query
+*.mx-api.com = server:https://1.1.1.1/dns-query
+netflix.com = server:https://1.1.1.1/dns-query
+*.netflix.com = server:https://1.1.1.1/dns-query
+netflix.net = server:https://1.1.1.1/dns-query
+*.netflix.net = server:https://1.1.1.1/dns-query
+nflxext.com = server:https://1.1.1.1/dns-query
+*.nflxext.com = server:https://1.1.1.1/dns-query
+nflximg.com = server:https://1.1.1.1/dns-query
+*.nflximg.com = server:https://1.1.1.1/dns-query
+nflximg.net = server:https://1.1.1.1/dns-query
+*.nflximg.net = server:https://1.1.1.1/dns-query
+nflxso.net = server:https://1.1.1.1/dns-query
+*.nflxso.net = server:https://1.1.1.1/dns-query
+nflxvideo.net = server:https://1.1.1.1/dns-query
+*.nflxvideo.net = server:https://1.1.1.1/dns-query
+nordvpn.com = server:https://1.1.1.1/dns-query
+*.nordvpn.com = server:https://1.1.1.1/dns-query
+oaistatic.com = server:https://1.1.1.1/dns-query
+*.oaistatic.com = server:https://1.1.1.1/dns-query
+oaiusercontent.com = server:https://1.1.1.1/dns-query
+*.oaiusercontent.com = server:https://1.1.1.1/dns-query
+office.com = server:https://1.1.1.1/dns-query
+*.office.com = server:https://1.1.1.1/dns-query
+office365.com = server:https://1.1.1.1/dns-query
+*.office365.com = server:https://1.1.1.1/dns-query
+one.one.one.one = server:https://1.1.1.1/dns-query
+*.one.one.one.one = server:https://1.1.1.1/dns-query
+openai.com = server:https://1.1.1.1/dns-query
+*.openai.com = server:https://1.1.1.1/dns-query
+outlook.com = server:https://1.1.1.1/dns-query
+*.outlook.com = server:https://1.1.1.1/dns-query
+paypal.com = server:https://1.1.1.1/dns-query
+*.paypal.com = server:https://1.1.1.1/dns-query
+paypalobjects.com = server:https://1.1.1.1/dns-query
+*.paypalobjects.com = server:https://1.1.1.1/dns-query
+perfect-privacy.com = server:https://1.1.1.1/dns-query
+*.perfect-privacy.com = server:https://1.1.1.1/dns-query
+perplexity.ai = server:https://1.1.1.1/dns-query
+*.perplexity.ai = server:https://1.1.1.1/dns-query
+ping0.cc = server:https://1.1.1.1/dns-query
+*.ping0.cc = server:https://1.1.1.1/dns-query
+pixelscan.net = server:https://1.1.1.1/dns-query
+*.pixelscan.net = server:https://1.1.1.1/dns-query
+pub.3gppnetwork.org = server:https://1.1.1.1/dns-query
+*.pub.3gppnetwork.org = server:https://1.1.1.1/dns-query
+redd.it = server:https://1.1.1.1/dns-query
+*.redd.it = server:https://1.1.1.1/dns-query
+reddit.com = server:https://1.1.1.1/dns-query
+*.reddit.com = server:https://1.1.1.1/dns-query
+redditmedia.com = server:https://1.1.1.1/dns-query
+*.redditmedia.com = server:https://1.1.1.1/dns-query
+redditstatic.com = server:https://1.1.1.1/dns-query
+*.redditstatic.com = server:https://1.1.1.1/dns-query
+scdn.co = server:https://1.1.1.1/dns-query
+*.scdn.co = server:https://1.1.1.1/dns-query
+sora.com = server:https://1.1.1.1/dns-query
+*.sora.com = server:https://1.1.1.1/dns-query
+spotify.com = server:https://1.1.1.1/dns-query
+*.spotify.com = server:https://1.1.1.1/dns-query
+spotifycdn.com = server:https://1.1.1.1/dns-query
+*.spotifycdn.com = server:https://1.1.1.1/dns-query
+spotifycdn.net = server:https://1.1.1.1/dns-query
+*.spotifycdn.net = server:https://1.1.1.1/dns-query
+steamcommunity.com = server:https://1.1.1.1/dns-query
+*.steamcommunity.com = server:https://1.1.1.1/dns-query
+steampowered.com = server:https://1.1.1.1/dns-query
+*.steampowered.com = server:https://1.1.1.1/dns-query
+steamstatic.com = server:https://1.1.1.1/dns-query
+*.steamstatic.com = server:https://1.1.1.1/dns-query
+stripe.com = server:https://1.1.1.1/dns-query
+*.stripe.com = server:https://1.1.1.1/dns-query
+stripe.network = server:https://1.1.1.1/dns-query
+*.stripe.network = server:https://1.1.1.1/dns-query
+surfshark.com = server:https://1.1.1.1/dns-query
+*.surfshark.com = server:https://1.1.1.1/dns-query
+surfsharkdns.com = server:https://1.1.1.1/dns-query
+*.surfsharkdns.com = server:https://1.1.1.1/dns-query
+t-mobile.com = server:https://1.1.1.1/dns-query
+*.t-mobile.com = server:https://1.1.1.1/dns-query
+t.co = server:https://1.1.1.1/dns-query
+*.t.co = server:https://1.1.1.1/dns-query
+t.me = server:https://1.1.1.1/dns-query
+*.t.me = server:https://1.1.1.1/dns-query
+telegra.ph = server:https://1.1.1.1/dns-query
+*.telegra.ph = server:https://1.1.1.1/dns-query
+telegram.me = server:https://1.1.1.1/dns-query
+*.telegram.me = server:https://1.1.1.1/dns-query
+telegram.org = server:https://1.1.1.1/dns-query
+*.telegram.org = server:https://1.1.1.1/dns-query
+telesco.pe = server:https://1.1.1.1/dns-query
+*.telesco.pe = server:https://1.1.1.1/dns-query
+tello.com = server:https://1.1.1.1/dns-query
+*.tello.com = server:https://1.1.1.1/dns-query
+threads.com = server:https://1.1.1.1/dns-query
+*.threads.com = server:https://1.1.1.1/dns-query
+threads.net = server:https://1.1.1.1/dns-query
+*.threads.net = server:https://1.1.1.1/dns-query
+tiktok.com = server:https://1.1.1.1/dns-query
+*.tiktok.com = server:https://1.1.1.1/dns-query
+tiktokcdn-us.com = server:https://1.1.1.1/dns-query
+*.tiktokcdn-us.com = server:https://1.1.1.1/dns-query
+tiktokcdn.com = server:https://1.1.1.1/dns-query
+*.tiktokcdn.com = server:https://1.1.1.1/dns-query
+tiktokv.com = server:https://1.1.1.1/dns-query
+*.tiktokv.com = server:https://1.1.1.1/dns-query
+ttvnw.net = server:https://1.1.1.1/dns-query
+*.ttvnw.net = server:https://1.1.1.1/dns-query
+twimg.com = server:https://1.1.1.1/dns-query
+*.twimg.com = server:https://1.1.1.1/dns-query
+twitch.tv = server:https://1.1.1.1/dns-query
+*.twitch.tv = server:https://1.1.1.1/dns-query
+twitter.com = server:https://1.1.1.1/dns-query
+*.twitter.com = server:https://1.1.1.1/dns-query
+vpnunlimited.com = server:https://1.1.1.1/dns-query
+*.vpnunlimited.com = server:https://1.1.1.1/dns-query
+whatsapp.com = server:https://1.1.1.1/dns-query
+*.whatsapp.com = server:https://1.1.1.1/dns-query
+whatsapp.net = server:https://1.1.1.1/dns-query
+*.whatsapp.net = server:https://1.1.1.1/dns-query
+whoer.net = server:https://1.1.1.1/dns-query
+*.whoer.net = server:https://1.1.1.1/dns-query
+whrq.net = server:https://1.1.1.1/dns-query
+*.whrq.net = server:https://1.1.1.1/dns-query
+windows.net = server:https://1.1.1.1/dns-query
+*.windows.net = server:https://1.1.1.1/dns-query
+wise.com = server:https://1.1.1.1/dns-query
+*.wise.com = server:https://1.1.1.1/dns-query
+x.ai = server:https://1.1.1.1/dns-query
+*.x.ai = server:https://1.1.1.1/dns-query
+x.com = server:https://1.1.1.1/dns-query
+*.x.com = server:https://1.1.1.1/dns-query
+youtu.be = server:https://1.1.1.1/dns-query
+*.youtu.be = server:https://1.1.1.1/dns-query
+youtube.com = server:https://1.1.1.1/dns-query
+*.youtube.com = server:https://1.1.1.1/dns-query
+ytimg.com = server:https://1.1.1.1/dns-query
+*.ytimg.com = server:https://1.1.1.1/dns-query
