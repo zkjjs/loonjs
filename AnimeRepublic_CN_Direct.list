@@ -1,0 +1,5 @@
+# Anime Republic (动漫共和国) - Loon direct connection rules
+# Source: HAR capture, 2026-10-20
+DOMAIN,bkbfdm.cenmo.fun,DIRECT
+DOMAIN,jxbfdm.cenmo.fun,DIRECT
+DOMAIN,m.ykimg.com,DIRECT
