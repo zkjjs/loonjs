@@ -1,25 +1,16 @@
 #!name = 美团外卖去开屏广告
-#!desc = 精确匹配开屏接口与素材,并让主接口回退普通HTTPS以便解密;不拦截域名,不影响下单/红包/首页等功能
+#!desc = 仅拦截开屏品牌广告素材(bizad_brandCpt),不拦截域名,不影响下单/红包/首页等功能
 #!author = custom
 #!icon = https://raw.githubusercontent.com/Toperlock/Quantumult/main/icon/meituan.png
 #!date = 2026-10-24
 
 [Rewrite]
-# 拦截 shark 隧道节点的 HTTPDNS 查询(明文HTTP),让主接口回退普通HTTPS,wmapi 才能被解密
-# 如出现加载变慢/异常,删掉这一行即可
-^http:\/\/[\d.]+\/fetch\?dm=shark-\w+\.meituan\.com reject-dict
-
-# 开屏品牌素材图(只匹配 bizad_brandCpt_,不影响 bizad 目录下其他图片)
+# 开屏品牌大图(抓包实测: img.meituan.net/bizad/bizad_brandCpt_xxx.jpg.webp@1284w_1l)
+# 只匹配 bizad_brandCpt_,不会影响 bizad 目录下的其他小图
 ^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg(\.webp)? reject-img
-# 开屏素材 linglong 目录(图片/视频)
+# 开屏视频/动图素材(社区规则,抓包中未出现,仅作兜底)
 ^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) reject
-# 开屏视频包(只匹配 brandcpt-vedio)
 ^https?:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/brandcpt-vedio\/ reject-200
-# 开屏/启动图接口
-^https?:\/\/wmapi\.meituan\.com\/api\/v\d+\/(openscreen|startpicture) reject-dict
-
-[Script]
-http-response ^https?:\/\/wmapi\.meituan\.com\/api\/v\d+\/loadInfo script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/startup/startup.js, requires-body=true, timeout=10, tag=美团外卖开屏广告
 
 [MITM]
-hostname = wmapi.meituan.com, img.meituan.net, s3plus.meituan.net, flowplus.meituan.net
+hostname = img.meituan.net, s3plus.meituan.net, flowplus.meituan.net
