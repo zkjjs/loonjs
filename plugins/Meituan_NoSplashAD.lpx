@@ -6,8 +6,9 @@
 
 [Rewrite]
 # 开屏品牌大图(抓包实测: img.meituan.net/bizad/bizad_brandCpt_xxx.jpg.webp@1284w_1l)
+# 用 reject 让下载直接失败,App 才可能整个跳过开屏;reject-img 会返回1px图,App 仍显示空白开屏壳
 # 只匹配 bizad_brandCpt_,不会影响 bizad 目录下的其他小图
-^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg(\.webp)? reject-img
+^https?:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg(\.webp)? reject
 # 开屏视频/动图素材(社区规则,抓包中未出现,仅作兜底)
 ^https?:\/\/(s3plus|flowplus)\.meituan\.net\/v\d\/\w+\/linglong\/\w+\.(gif|jpg|mp4) reject
 ^https?:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/brandcpt-vedio\/ reject-200
