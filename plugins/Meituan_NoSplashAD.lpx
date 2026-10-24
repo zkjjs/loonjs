@@ -1,0 +1,12 @@
+#!name = 美团外卖去开屏广告
+#!desc = 仅处理开屏广告配置接口(loadInfo),不拦截域名、不影响下单/红包/首页等其他功能
+#!author = custom
+#!icon = https://raw.githubusercontent.com/Toperlock/Quantumult/main/icon/meituan.png
+#!date = 2026-10-24
+
+[Script]
+# 仅匹配开屏配置接口,响应阶段改写,其余 wmapi 请求不受影响
+http-response ^https?:\/\/wmapi\.meituan\.com\/api\/v\d+\/loadInfo script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/startup/startup.js, requires-body=true, timeout=10, tag=美团外卖开屏广告
+
+[MITM]
+hostname = wmapi.meituan.com
