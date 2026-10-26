@@ -1,5 +1,5 @@
 #!name = 美团App 12.67.403
-#!desc = 美团去广告(QX snippet 适配 Loon,含首页 homepage/display)
+#!desc = 美团去广告(由 QX snippet 适配)
 #!author = TG@ZenMoFiShi
 #!date = 2026-10-26
 
@@ -51,8 +51,6 @@ http-response ^https?:\/\/assistify\.meituan\.com\/assistant\/getAppClientHornCo
 http-response ^https?:\/\/mop\.meituan\.com\/mop\/entry\/shoppingCartEntry script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_shoppingCart
 http-response ^https?:\/\/mop\.meituan\.com\/api\/entryModule\/startupPicture script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_startupPicture
 
-# 新增:首页 homepage/display(把下面的地址换成你自己托管 MT_homepage.js 的 raw 链接)
-http-response ^https?:\/\/apimobile\.meituan\.com\/aggroup\/homepage\/display script-path=https://raw.githubusercontent.com/你的用户名/你的仓库/main/MT_homepage.js, requires-body=true, tag=美团_homepage
 
 [MitM]
 hostname = apimobile.meituan.com, feedguess.meituan.com, mop.meituan.com, mt-personalcenter.meituan.com, assistify.meituan.com
