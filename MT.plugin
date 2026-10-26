@@ -1,7 +1,7 @@
 #!name = 美团App 12.67.403
-#!desc = 美团去广告(由 QX snippet 适配)
+#!desc = 美团去广告(QX snippet 适配 Loon,含首页 homepage/display)
 #!author = TG@ZenMoFiShi
-#!date = 2026-10-25
+#!date = 2026-10-26
 
 [Rule]
 DOMAIN,shark-mt.meituan.com,REJECT
@@ -41,6 +41,7 @@ IP-CIDR6,2405:1480:3000:303b::303b/128,REJECT,no-resolve
 IP-CIDR6,2405:1480:1000:3::1e/128,REJECT,no-resolve
 
 [Script]
+# 原作者脚本(保持不变)
 http-response ^https?:\/\/apimobile\.meituan\.com\/aggroup\/indexTab script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_indexTab
 http-response ^https?:\/\/feedguess\.meituan\.com\/lycoris\/scene\/(gwc_feed1_2265|personalcenter_2154)(\?|$) script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_feedguess
 http-response ^https?:\/\/mt-personalcenter\.meituan\.com\/usercenter\/display script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_personalcenter
@@ -49,6 +50,9 @@ http-response ^https?:\/\/apimobile\.meituan\.com\/group\/v1\/deal\/searchpage\/
 http-response ^https?:\/\/assistify\.meituan\.com\/assistant\/getAppClientHornConfig script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_hornConfig
 http-response ^https?:\/\/mop\.meituan\.com\/mop\/entry\/shoppingCartEntry script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_shoppingCart
 http-response ^https?:\/\/mop\.meituan\.com\/api\/entryModule\/startupPicture script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/MT.js, requires-body=true, tag=美团_startupPicture
+
+# 新增:首页 homepage/display(把下面的地址换成你自己托管 MT_homepage.js 的 raw 链接)
+http-response ^https?:\/\/apimobile\.meituan\.com\/aggroup\/homepage\/display script-path=https://raw.githubusercontent.com/你的用户名/你的仓库/main/MT_homepage.js, requires-body=true, tag=美团_homepage
 
 [MitM]
 hostname = apimobile.meituan.com, feedguess.meituan.com, mop.meituan.com, mt-personalcenter.meituan.com, assistify.meituan.com
