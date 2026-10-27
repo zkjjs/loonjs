@@ -1,0 +1,19 @@
+#!name = 腾讯视频净化 · Loon
+#!desc = 基于 ZenmoFeiShi/Qx 2026-10-27 规则适配。去开屏、播放广告及部分界面推广，精简底栏。需启用脚本与MITM并信任证书；效果随腾讯视频版本变化。
+#!author = TG@ZenMoFiShi, Loon adaptation
+#!homepage = https://github.com/ZenmoFeiShi/Qx
+#!date = 2026-10-27
+
+[Rule]
+DOMAIN,iacc.stgw.qq.com,REJECT
+DOMAIN,tacc.video.qq.com,REJECT
+
+[Script]
+http-request ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/TxvideoAD_Loon.js,requires-body=true,binary-body-mode=true,timeout=20,tag=腾讯视频请求净化
+http-response ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/TxvideoAD_Loon.js,requires-body=true,binary-body-mode=true,timeout=20,tag=腾讯视频响应净化
+http-response ^https?:\/\/iacc\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/TxvideoAD_Loon.js,requires-body=true,binary-body-mode=true,timeout=20,tag=腾讯视频JCE净化
+http-response ^https?:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/TxvideoAD_Loon.js,requires-body=true,binary-body-mode=true,timeout=20,tag=腾讯视频底栏净化
+http-response ^https:\/\/rdelivery\.qq\.com\/v1\/sdkconfig\/get(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/TxvideoAD_Loon.js,requires-body=true,binary-body-mode=false,timeout=20,tag=腾讯视频配置净化
+
+[MITM]
+hostname = i.video.qq.com, iacc.qq.com, config.ab.qq.com, rdelivery.qq.com
