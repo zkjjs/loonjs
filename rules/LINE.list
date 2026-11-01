@@ -1,0 +1,12 @@
+# LINE for Loon - domain-based remote rules
+# Updated: 2026-11-01
+# Import into Loon > Configuration > Rules > Remote Rules
+# Select your LINE proxy policy (prefer Japan/Taiwan depending on availability).
+# This file contains no policy names by design.
+# No MITM, rewrite, DNS override, UDP port override, or IP-CIDR.
+DOMAIN-SUFFIX,line.me
+DOMAIN-SUFFIX,line-apps.com
+DOMAIN-SUFFIX,line-scdn.net
+DOMAIN-SUFFIX,line.naver.jp
+DOMAIN-SUFFIX,line-cdn.net
+DOMAIN-SUFFIX,line.biz
