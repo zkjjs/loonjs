@@ -2,21 +2,26 @@
 (() => {
   const sourceURL = "https://raw.githubusercontent.com/ZenmoFeiShi/Qx/5df3cafc468419e7b58b0f4a1b75df0786ab1c67/Txvideoad.js";
   const cacheKey = "zkjjs.txvideo.qx.5df3cafc468419e7b58b0f4a1b75df0786ab1c67";
+  const host = ($request.url || "").split("/")[2]?.split(":")[0] || "unknown";
+  const phase = typeof $response === "undefined" ? "request" : "response";
   let finished = false;
 
   function done(result) {
     if (finished) return;
     finished = true;
+    const outcome = result && result.body !== undefined ? "rewritten" : "passthrough";
+    console.log(`[TxvideoAD] ${phase} ${host}: ${outcome}`);
     $done(result);
   }
 
   function adaptMessage(message) {
-    if (!message || typeof message.body === "string") return message;
+    if (!message) return message;
     const body = message.body;
-    const bodyBytes = ArrayBuffer.isView(body)
-      ? body.buffer.slice(body.byteOffset, body.byteOffset + body.byteLength)
-      : body;
-    return Object.assign({}, message, { bodyBytes });
+    return {
+      url: message.url,
+      body,
+      bodyBytes: typeof body === "string" ? undefined : body,
+    };
   }
 
   function apply(source, save = false) {
@@ -34,7 +39,7 @@
   }
 
   function fail(error) {
-    console.log("TxvideoAD Loon: " + error);
+    console.log(`[TxvideoAD] ${phase} ${host}: ${error}`);
     done({});
   }
 
@@ -49,7 +54,7 @@
       if (finished) return;
       if (error || !response || response.status !== 200 ||
           typeof source !== "string" || !source.trimStart().startsWith("(() => {")) {
-        fail(error || "upstream script unavailable");
+        fail(error || `upstream script unavailable (HTTP ${response?.status ?? "unknown"})`);
         return;
       }
       try {
