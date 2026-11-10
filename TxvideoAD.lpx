@@ -1,5 +1,5 @@
 #!name = 腾讯视频净化（Loon）
-#!desc = 清理开屏和播放广告，精简底栏与我的页面。
+#!desc = v2：清理开屏和播放广告，精简底栏与我的页面。
 #!author = TG@ZenMoFiShi
 #!homepage = https://github.com/ZenmoFeiShi/Qx/blob/main/TxvideoAD.snippet
 #!date = 2026-11-11
@@ -10,11 +10,11 @@ DOMAIN,iacc.stgw.qq.com,REJECT
 DOMAIN,tacc.video.qq.com,REJECT
 
 [Script]
-http-request ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频请求
-http-response ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频响应
-http-response ^https?:\/\/iacc\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频广告数据
-http-response ^https?:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频底栏配置
-http-response ^https:\/\/rdelivery\.qq\.com\/v1\/sdkconfig\/get(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/main/Txvideoad-loon.js, requires-body=true, binary-body-mode=false, timeout=10, tag=腾讯视频实验配置
+http-request ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/136b0ef3fcaae9b2eb767d39228820e29076f5a7/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频请求
+http-response ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/136b0ef3fcaae9b2eb767d39228820e29076f5a7/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频响应
+http-response ^https?:\/\/iacc\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/136b0ef3fcaae9b2eb767d39228820e29076f5a7/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频广告数据
+http-response ^https?:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/136b0ef3fcaae9b2eb767d39228820e29076f5a7/Txvideoad-loon.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频底栏配置
+http-response ^https:\/\/rdelivery\.qq\.com\/v1\/sdkconfig\/get(?:\?.*)?$ script-path=https://raw.githubusercontent.com/zkjjs/loonjs/136b0ef3fcaae9b2eb767d39228820e29076f5a7/Txvideoad-loon.js, requires-body=true, binary-body-mode=false, timeout=10, tag=腾讯视频实验配置
 
 [Mitm]
 hostname = i.video.qq.com, iacc.qq.com, config.ab.qq.com, rdelivery.qq.com
