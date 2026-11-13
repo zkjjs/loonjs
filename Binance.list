@@ -1,0 +1,10 @@
+# Binance | Loon remote rules
+# Global site, API, WebSocket, testnet, static assets and regional sites
+# https://developers.binance.com/en/docs/products/spot/rest-api
+# https://developers.binance.com/zh-CN/docs/products/spot/testnet/web-socket-streams
+DOMAIN-SUFFIX,binance.com
+DOMAIN-SUFFIX,binance.vision
+DOMAIN-SUFFIX,bnbstatic.com
+DOMAIN-SUFFIX,binance.us
+DOMAIN-SUFFIX,binance.tr
+DOMAIN-SUFFIX,binance.th
