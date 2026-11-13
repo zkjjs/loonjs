@@ -1,0 +1,17 @@
+# Bybit | Loon remote rules
+# Global, testnet and regional endpoints
+# https://bybit-exchange.github.io/docs/v5/guide
+# https://bybit-exchange.github.io/docs/v5/ws/connect
+DOMAIN-SUFFIX,bybit.com
+DOMAIN-SUFFIX,bytick.com
+DOMAIN-SUFFIX,bybitglobal.com
+DOMAIN-SUFFIX,bybit-global.com
+DOMAIN-SUFFIX,bybit.cloud
+DOMAIN-SUFFIX,bybit.eu
+DOMAIN-SUFFIX,bybit.tr
+DOMAIN-SUFFIX,bybit.kz
+DOMAIN-SUFFIX,bybitgeorgia.ge
+DOMAIN-SUFFIX,bybit.ae
+DOMAIN-SUFFIX,bybit.id
+DOMAIN-SUFFIX,manepa.jp
+DOMAIN-SUFFIX,spark-fintech.com
