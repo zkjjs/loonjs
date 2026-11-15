@@ -1,0 +1,19 @@
+# Siri / Apple Intelligence Loon rules
+# Based on supplied screenshot. Requires a policy named PROXY.
+[Rule]
+DOMAIN-SUFFIX,itunes.apple.com,PROXY
+DOMAIN-SUFFIX,smp-device-content.apple.com,PROXY
+DOMAIN-SUFFIX,xp.apple.com,PROXY
+DOMAIN-SUFFIX,mesu.apple.com,PROXY
+DOMAIN,guzzoni.apple.com,PROXY
+DOMAIN-SUFFIX,smoot.apple.com,PROXY
+DOMAIN-SUFFIX,chatgpt.com,PROXY
+DOMAIN-SUFFIX,openai.com,PROXY
+DOMAIN,gateway.icloud.com,PROXY
+DOMAIN,gs-loc-cn.apple.com,PROXY
+DOMAIN,gspe1-ssl.ls.apple.com,PROXY
+DOMAIN,p150-acegateway.icloud.com,PROXY
+DOMAIN,setup.icloud.com,PROXY
+DOMAIN,bag.itunes.apple.com,PROXY
+DOMAIN-KEYWORD,siri,PROXY
+DOMAIN-SUFFIX,icloud-content.com,PROXY
