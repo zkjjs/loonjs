@@ -1,0 +1,7 @@
+# NAME: TextNow
+# DESCRIPTION: TextNow app and web routing for Loon
+# UPDATED: 2026-11-16
+# Note: TextNow can reject VPN/proxy logins. This rule does not bypass service restrictions.
+DOMAIN-SUFFIX,textnow.com
+DOMAIN-SUFFIX,textnow.me
+DOMAIN-KEYWORD,textnow
