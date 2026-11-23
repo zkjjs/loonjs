@@ -1,0 +1,17 @@
+# Binance | Loon remote rule
+# Select the outbound policy when adding this list in Loon.
+# Exchange, Spot, USD-M / COIN-M Futures and WebSocket subdomains
+DOMAIN-SUFFIX,binance.com
+DOMAIN-SUFFIX,binance.vision
+DOMAIN-SUFFIX,binancefuture.com
+DOMAIN-SUFFIX,binance.info
+DOMAIN-SUFFIX,binance.me
+DOMAIN-SUFFIX,binance.cloud
+# App, assets and related service domains
+DOMAIN-SUFFIX,binancecnt.com
+DOMAIN-SUFFIX,bnappzh.co
+DOMAIN-SUFFIX,bnbstatic.com
+DOMAIN-SUFFIX,bnbzh.ac
+DOMAIN-SUFFIX,bntrace.com
+DOMAIN-SUFFIX,saasexch.cc
+DOMAIN-SUFFIX,saasexch.com
